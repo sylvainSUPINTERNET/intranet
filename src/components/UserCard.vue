@@ -57,7 +57,15 @@
 
         },
         filters:{
+            computedAge(birthdate) {
+                let [d,m,y] = birthdate.split("/");
 
+                let dateTime = new Date(y,m,d).getTime();
+
+                return Math.floor(
+                    (Date.now() - dateTime) / (365,25 * 24 * 60 * 60 * 1000)
+                )
+            }
         }
     }
 </script>

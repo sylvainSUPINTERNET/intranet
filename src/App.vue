@@ -1,47 +1,37 @@
 <template>
   <div id="app">
-    <user-card :user="user"></user-card>
-    <button type="button" class="btn btn-primary" v-on:click="changeUser()">
-      <span class="glyphicon glyphicon-refresh " aria-hidden="true"></span>
-      Dire bonjour à quelqu'un d'autres</button>
+
+    <header>
+      <nav class="navbar navbar-center">
+        <a class="navbar-brand" href="#">Accueil</a>
+        <a class="navbar-brand" href="#">Liste des collaborateurs</a>
+        <a class="navbar-brand" href="#">Ajouter un collaborateur</a>
+      </nav>
+    </header>
+
+    <home-view/>
+    <list-view/>
+
   </div>
 </template>
 <script>
-  import users from '../src/assets/data/_users.json';
-  import UserCard from "./components/UserCard.vue"; //import le json
 
-export default {
-    components: {UserCard},
+  //views
+  import HomeView from "./views/Home.vue"; //import le json
+  import ListView from "./views/List.vue"; //import le json
+  import AddView from "./views/Add.vue";
+  import EditView from "./views/Edit.vue";
+
+
+  export default {
+    components: {HomeView, ListView, AddView, EditView},
     name: 'app',
-    data () {
-        return {
-            user: this.getRandomUser()
-        }
-    },
     methods:{
-        getRandomUser: function(){
-            var user = users[Math.floor((Math.random() * 10-1) + 1)];
-            console.log(user);
-            //his.data.user = user;
-            this.user = user;
-            return user;
-        },
-        changeUser: function(){
-            console.log("pressed buton");
-            this.user = this.getRandomUser();
-        }
+
 
     },
     filters:{
-        computedAge(birthdate) {
-            let [d,m,y] = birthdate.split("/");
 
-            let dateTime = new Date(y,m,d).getTime();
-
-            return Math.floor(
-                (Date.now() - dateTime) / (365,25 * 24 * 60 * 60 * 1000)
-            )
-        }
     }
 }
 </script>
