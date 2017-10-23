@@ -4,6 +4,9 @@
 
 <template>
  <div id="homeView">
+     <h1>Bienvenue sur Sup'intranet</h1>
+     <hr class="hrWelcom">
+     <p class="dit-bonjour">Avez vous dit bonjour à ...</p>
      <user-card :user="user"></user-card>
      <button type="button" class="btn btn-primary" v-on:click="changeUser()">
          <span class="glyphicon glyphicon-refresh " aria-hidden="true"></span>

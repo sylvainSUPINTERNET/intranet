@@ -4,13 +4,6 @@
 
 <template>
  <div id="userCard">
-  <h1>{{ welcomMsg }}</h1>
-  <h2>{{subMsg}}</h2>
-  <hr class="hrWelcom">
-
-  <p class="dit-bonjour">Avez vous dit bonjour à ...</p>
-
-
   <div class="card" style="width: 60rem;">
    <div class="profile-pic">
     <img class="card-img-top" :src="user.photo" alt="Card image cap">

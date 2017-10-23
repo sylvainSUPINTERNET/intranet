@@ -2,15 +2,28 @@
   <div id="app">
 
     <header>
-      <nav class="navbar navbar-center">
-        <a class="navbar-brand" href="#">Accueil</a>
-        <a class="navbar-brand" href="#">Liste des collaborateurs</a>
-        <a class="navbar-brand" href="#">Ajouter un collaborateur</a>
-      </nav>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <router-link to="/" class="navbar-brand">Accueil</router-link>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-left">
+            <router-link to="/list" class="navbar-brand">Liste des collaborateurs</router-link>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <router-link to="/add" class="navbar-brand">Ajouter un collaborateur</router-link>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
     </header>
 
-    <home-view/>
-    <list-view/>
+
+    <router-view></router-view>
 
   </div>
 </template>
@@ -21,6 +34,7 @@
   import ListView from "./views/List.vue"; //import le json
   import AddView from "./views/Add.vue";
   import EditView from "./views/Edit.vue";
+
 
 
   export default {
@@ -34,6 +48,7 @@
 
     }
 }
+
 </script>
 
 <style>

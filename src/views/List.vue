@@ -12,22 +12,32 @@
      <option value="name">Nom</option>
      <option value="firstname">Prénom</option>
  </select>
-
-
+     <ul>
+         <li v-for="user in users">
+             <user-card :user="user"></user-card>
+         </li>
+     </ul>
  </div>
 </template>
 
 
 <script>
 
-    import UserCard from "../components/UserCard.vue"; //import le json
+
     import users from '../../src/assets/data/_users.json';
+    import UserCard from "../components/UserCard.vue";
 
 
     //composant app
     //on peut aussi indiquer ici le template si on le souhiate (pas besoin de passer par <template>
     export default {
+        components: {UserCard},
         name: 'listView',
+        data () {
+            return {
+                users: users
+            }
+        },
         methods:{
 
         },
