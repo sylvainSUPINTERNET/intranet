@@ -6,16 +6,16 @@
  <div id="listView">
    <h1>Liste des collaborateurs</h1>
      <hr class="hrWelcom">
-    <input type="text" placeholder="rechercher ..." v-model="wordSearch">
+    <input type="text" placeholder="rechercher ..." v-model="wordSearch" @input="filterSearch">
      filtrer par :filtrer par :
-     <select name="filterSearch" v-model="sortBy">
+     <select name="filterSearch" v-model="filterBy" @change="filterSearch">
      <option value="name">Nom</option>
      <option value="localization">Localization</option>
  </select>
      <ul>
          <!-- user in users -->
 
-         <li v-for="user in users">
+         <li v-for="user in filteredUsers">
              <user-card :user="user" @remove="removeUser"></user-card>
          </li>
      </ul>
@@ -37,24 +37,28 @@
         name: 'listView',
         data () {
             return {
-                users: users,
-                usersSelected: [],
+                users: users, //init users list
+                filteredUsers : users, //filter list
                 wordSearch: "",
-                sortBy: "",
+                filterBy : 'name'
             }
         },
         methods:{
             removeUser(user){
                 console.log(`user to remove ${user}`);
                 console.log(user);
-                console.log(this.users.length);
-                this.users = this.users.filter(function(el){
+                this.filteredUsers = this.filteredUsers.filter(function(el){
                     console.log(el, user, el === user)
                     return el !== user;
                 });
-
-                console.log(this.users.length);
+                console.log(this.filteredUsers.length);
             },
+
+
+            filterSearch() {
+                this.filteredUsers = this.users.filter( this.filterBy === 'localisation' ? filterByLocalisation.bind(this) : filterByName.bind(this) );
+            },
+
 
             /*
             filteredItems() {
@@ -81,6 +85,18 @@
 
         }
     }
+
+
+    function filterByName(user) {
+        return user.firstname.toLowerCase().includes(this.wordSearch.toLowerCase()) ||
+            user.lastname.toLowerCase().includes(this.wordSearch.toLowerCase())
+    }
+    function filterByLocalisation(user) {
+        return user.city.toLowerCase().includes(this.wordSearch.toLowerCase()) ||
+            user.country.toLowerCase().includes(this.wordSearch.toLowerCase())
+    }
+
+
 </script>
 
 

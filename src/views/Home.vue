@@ -7,7 +7,7 @@
      <h1>Bienvenue sur Sup'intranet</h1>
      <hr class="hrWelcom">
      <p class="dit-bonjour">Avez vous dit bonjour à ...</p>
-     <user-card :user="user"></user-card>
+     <user-card :user="user" @remove="removeUser"></user-card>
      <button type="button" class="btn btn-primary" v-on:click="changeUser()">
          <span class="glyphicon glyphicon-refresh " aria-hidden="true"></span>
          Dire bonjour à quelqu'un d'autres</button>
@@ -28,10 +28,13 @@
         name: 'homeView',
         data () {
             return {
-                user: this.getRandomUser()
+                user: this.getRandomUser(),
             }
         },
         methods:{
+            removeUser(user){
+                console.log(`user to remove ${user.lastname}`);
+            },
             getRandomUser: function(){
                 var user = users[Math.floor((Math.random() * 10-1) + 1)];
                 console.log(user);
