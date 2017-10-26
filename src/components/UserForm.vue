@@ -13,27 +13,36 @@
     <br>
     <label for="name">Nom : </label>
     <input type="text" class="form-check" id="name" placeholder="DOE" v-model="user.name">
+    <small class="form-text text-muted" v-if="!$v.user.name.required" > name is required</small>
+    <small class="form-text text-muted" v-if="!$v.user.name.minLength"> your name is too short </small>
     <br>
     <label for="firstname">Prénom : </label>
     <input type="text" class="form-check" id="firstname" placeholder="John" v-model="user.firstname">
+    <small class="form-text text-muted" v-if="!$v.user.firstname.required" > firstname is required</small>
+    <small class="form-text text-muted" v-if="!$v.user.firstname.minLength"> your firstname is too short </small>
     <br>
     <label for="email">Email : </label>
     <input type="email" class="form-check" id="email" placeholder="john@supinternet.fr" v-model="user.email">
+    <small class="form-text text-muted" v-if="!$v.user.email.required" > email required</small>
     <br>
     <label for="phone">Phone : </label>
     <input type="tel" class="form-check" id="phone" placeholder="+330642561130" v-model="user.phone">
+    <small class="form-text text-muted" v-if="!$v.user.phone.required" > phone required</small>
     <br>
     <label for="birthdate">Date de naissance : </label>
     <input type="date" class="form-check" id="birthdate" v-model="user.birthdate">
+    <small class="form-text text-muted" v-if="!$v.user.birthdate.required" > birthdate required</small>
     <br>
     <label for="city">Ville : </label>
     <input type="text" class="form-check" id="city" placeholder="Paris" v-model="user.city">
+    <small class="form-text text-muted" v-if="!$v.user.city.required" > city required</small>
     <br>
     <label for="country">Pays : </label>
     <input type="text" class="form-check" id="country" placeholder="France" v-model="user.country">
+    <small class="form-text text-muted" v-if="!$v.user.country.required" > country required</small>
     <br>
     <label for="photo">Pays : </label>
-    <input type="url" class="form-check" id="photo" placeholder="https://" v-model="user.picture">
+    <input type="url" class="form-check" id="photo" placeholder="https://" v-model="user.photo">
 
     <br>
     <br>
@@ -47,6 +56,10 @@
 <script>
     //composant app
     //on peut aussi indiquer ici le template si on le souhiate (pas besoin de passer par <template>
+
+    import { required, sameAs, minLength } from 'vuelidate/lib/validators'
+
+
     export default {
         name : "user-form",
         props: {
@@ -54,7 +67,18 @@
         },
         data () {
             return {
-               user : {}
+               user : { //inutile en vue.js 2.5 (ajout du deep watcher qui regarde automatiquement de manière dynamique les propriété de 'objet en temps reel)
+                   gender:'',
+                   name:'',
+                   firstname:'',
+                   email:'',
+                   phone:'',
+                   birthdate:'',
+                   city:'',
+                   country:'',
+                   photo:''
+
+               },
             }
         },
         methods: {
@@ -63,7 +87,34 @@
             },
         },
         filters:{
-        }
+        },
+        validations: {
+            user : {
+                name:{
+                    required,
+                    minLength: minLength(2)
+                },
+                firstname:{
+                    required,
+                    minLength: minLength(2)
+                },
+                email:{
+                    required
+                },
+                phone:{
+                    required
+                },
+                birthdate:{
+                    required
+                },
+                city:{
+                    required
+                },
+                country:{
+                    required
+                }
+            }
+        },
     }
 </script>
 

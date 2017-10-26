@@ -26,6 +26,7 @@
  " aria-hidden="true"></span> {{user.country}} - {{user.city}}</p>
     </div>
    </div>
+   <button class="btn btn-success pull-left" @click.prevent="remove">Supprimer</button>
   </div>
   <br>
  </div>
@@ -47,7 +48,9 @@
             }
         },
         methods:{
-
+            remove(){
+                this.$emit("remove", this.user)
+            }
         },
         filters:{
             computedAge(birthdate) {

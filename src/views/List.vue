@@ -16,7 +16,7 @@
          <!-- user in users -->
 
          <li v-for="user in filteredItems">
-             <user-card :user="user"></user-card>
+             <user-card :user="user" @remove="removeUser"></user-card>
          </li>
      </ul>
  </div>
@@ -43,6 +43,11 @@
             }
         },
         methods:{
+            removeUser(user){
+                console.log(`user to remove ${user}`);
+                this.users.forEach(function(user) {
+                });
+            }
         },
         computed: {
             filteredItems() {

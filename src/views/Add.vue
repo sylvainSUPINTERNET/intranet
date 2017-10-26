@@ -17,20 +17,29 @@
     import users from '../../src/assets/data/_users.json';
     import UserForm from '../components/UserForm.vue';
 
+
+
     //composant app
     //on peut aussi indiquer ici le template si on le souhiate (pas besoin de passer par <template>
     export default {
         components: {UserForm},
         component: {UserForm},
         name: 'addView',
+        data () {
+            return {
+                user : {},
+            }
+        },
         methods:{
             addUser(user){
                     console.log(user);
+                    this.name = user.name
             }
         },
         filters:{
 
-        }
+        },
+
     }
 </script>
 

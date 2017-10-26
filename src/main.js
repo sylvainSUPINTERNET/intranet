@@ -8,7 +8,8 @@ import Vuelidate from 'vuelidate'
 
 
 //config router
-Vue.use(VueRouter, Vuelidate);
+Vue.use(VueRouter);
+Vue.use(Vuelidate);
 
 
 new Vue({
