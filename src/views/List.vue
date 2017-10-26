@@ -6,14 +6,16 @@
  <div id="listView">
    <h1>Liste des collaborateurs</h1>
      <hr class="hrWelcom">
-    <input type="text" placeholder="rechercher ...">
-     filtrer par :
-     <select name="filterSearch">
+    <input type="text" placeholder="rechercher ..." v-model="wordSearch">
+     filtrer par :filtrer par :
+     <select name="filterSearch" v-model="sortBy">
      <option value="name">Nom</option>
-     <option value="firstname">Prénom</option>
+     <option value="localization">Localization</option>
  </select>
      <ul>
-         <li v-for="user in users">
+         <!-- user in users -->
+
+         <li v-for="user in filteredItems">
              <user-card :user="user"></user-card>
          </li>
      </ul>
@@ -35,11 +37,63 @@
         name: 'listView',
         data () {
             return {
-                users: users
+                users: users,
+                wordSearch: "",
+                sortBy: "",
             }
         },
-        methods:{
 
+        //https://jsfiddle.net/7nxhygLp/
+        /*
+        watch: {
+            'wordSearch': function(str, oldVal){
+                let keyword = this.wordSearch;
+                console.log(this.wordSearch);
+
+                if (str.length > 0 && this.sortBy !== "" && str !== oldVal) { // recheche + filtre
+                    console.log("filtre + mot clé faire condition name ou localization");
+                    if(this.sortedBy === "name"){
+
+                    }
+                    if(this.sortedBy === "localization"){
+
+                    }
+                    console.log(this.sortBy)
+                }else if(str.length > 0 && this.sortBy === "" && str.length > oldVal){ // recherche + pas de filtre donc par défaut on cherche sur les nom
+                    console.log("par défaut sans filtre => cherche by name");
+                     //console.log(this.users.filter(function(x) { console.log(x.lastname.toLowerCase())}));
+                    for(let i= 0; i < users.length; i++){
+                        if(users[i].lastname.toLowerCase() === keyword){
+
+                        }
+                    }
+
+                }else{
+                    //bah afficher liste user par défaut
+                    console.log("rien afficher toute la liste");
+                    this.users = users;
+                }
+            }
+        },
+        */
+        methods:{
+        },
+        computed: {
+            filteredItems() {
+                if(this.wordSearch !== "" && this.sortBy === "name"){
+                    return this.users.filter(user => {
+                        return user.lastname.toLowerCase().indexOf(this.wordSearch.toLowerCase()) > -1
+                    })
+                }else if(this.wordSearch !== "" && this.sortBy === "localization"){
+                    return this.users.filter(user => {
+                        return user.city.toLowerCase().indexOf(this.wordSearch.toLowerCase()) > -1
+                    })
+                }else{
+                    this.users = users;
+                    return this.users;
+                }
+
+            }
         },
         filters:{
 
