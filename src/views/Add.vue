@@ -6,44 +6,7 @@
  <div id="addView">
      <h1>Ajouter un collaborateur</h1>
      <hr class="hrWelcom">
-
-     <form>
-         <div class="form-check">
-             <label class="form-check-label">
-                 Femme : <input type="radio" class="form-check-input" name="female" id="girl" value="female">
-                 Homme : <input type="radio" class="form-check-input" name="male" id="man" value="male">
-             </label>
-             <br>
-             <label for="name">Nom : </label>
-             <input type="text" class="form-check" id="name" placeholder="DOE">
-             <br>
-             <label for="firstname">Prénom : </label>
-             <input type="text" class="form-check" id="firstname" placeholder="John">
-             <br>
-             <label for="email">Email : </label>
-             <input type="email" class="form-check" id="email" placeholder="john@supinternet.fr">
-             <br>
-             <label for="phone">Phone : </label>
-             <input type="tel" class="form-check" id="phone" placeholder="+330642561130">
-             <br>
-             <label for="birthdate">Date de naissance : </label>
-             <input type="date" class="form-check" id="birthdate">
-             <br>
-             <label for="city">Ville : </label>
-             <input type="text" class="form-check" id="city" placeholder="Paris">
-             <br>
-             <label for="country">Pays : </label>
-             <input type="text" class="form-check" id="country" placeholder="France">
-             <br>
-             <label for="photo">Pays : </label>
-             <input type="url" class="form-check" id="photo" placeholder="https://">
-
-             <br>
-             <br>
-             <input type="submit" value="Envoyez !">
-         </div>
-     </form>
-
+     <user-form @send="addUser" ></user-form> <!-- on utilise l'event @send qui return object user et on le get dans une callback addUser qui prendra en param le param user -->
  </div>
 </template>
 
@@ -52,14 +15,18 @@
 
     import UserCard from '../components/UserCard.vue';
     import users from '../../src/assets/data/_users.json';
-
+    import UserForm from '../components/UserForm.vue';
 
     //composant app
     //on peut aussi indiquer ici le template si on le souhiate (pas besoin de passer par <template>
     export default {
+        components: {UserForm},
+        component: {UserForm},
         name: 'addView',
         methods:{
-
+            addUser(user){
+                    console.log(user);
+            }
         },
         filters:{
 

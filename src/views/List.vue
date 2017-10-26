@@ -42,40 +42,6 @@
                 sortBy: "",
             }
         },
-
-        //https://jsfiddle.net/7nxhygLp/
-        /*
-        watch: {
-            'wordSearch': function(str, oldVal){
-                let keyword = this.wordSearch;
-                console.log(this.wordSearch);
-
-                if (str.length > 0 && this.sortBy !== "" && str !== oldVal) { // recheche + filtre
-                    console.log("filtre + mot clé faire condition name ou localization");
-                    if(this.sortedBy === "name"){
-
-                    }
-                    if(this.sortedBy === "localization"){
-
-                    }
-                    console.log(this.sortBy)
-                }else if(str.length > 0 && this.sortBy === "" && str.length > oldVal){ // recherche + pas de filtre donc par défaut on cherche sur les nom
-                    console.log("par défaut sans filtre => cherche by name");
-                     //console.log(this.users.filter(function(x) { console.log(x.lastname.toLowerCase())}));
-                    for(let i= 0; i < users.length; i++){
-                        if(users[i].lastname.toLowerCase() === keyword){
-
-                        }
-                    }
-
-                }else{
-                    //bah afficher liste user par défaut
-                    console.log("rien afficher toute la liste");
-                    this.users = users;
-                }
-            }
-        },
-        */
         methods:{
         },
         computed: {
