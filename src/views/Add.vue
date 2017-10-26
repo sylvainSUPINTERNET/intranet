@@ -33,7 +33,7 @@
         methods:{
             addUser(user){
                     console.log(user);
-                    this.name = user.name
+                    this.lastname = user.lastname
             }
         },
         filters:{

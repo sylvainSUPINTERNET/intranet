@@ -13,8 +13,8 @@
     <br>
     <label for="name">Nom : </label>
     <input type="text" class="form-check" id="name" placeholder="DOE" v-model="user.name">
-    <small class="form-text text-muted" v-if="!$v.user.name.required" > name is required</small>
-    <small class="form-text text-muted" v-if="!$v.user.name.minLength"> your name is too short </small>
+    <small class="form-text text-muted" v-if="!$v.user.lastname.required" > lastname is required</small>
+    <small class="form-text text-muted" v-if="!$v.user.lastname.minLength"> your lastname is too short </small>
     <br>
     <label for="firstname">Prénom : </label>
     <input type="text" class="form-check" id="firstname" placeholder="John" v-model="user.firstname">
@@ -69,7 +69,7 @@
             return {
                user : { //inutile en vue.js 2.5 (ajout du deep watcher qui regarde automatiquement de manière dynamique les propriété de 'objet en temps reel)
                    gender:'',
-                   name:'',
+                   lastname:'',
                    firstname:'',
                    email:'',
                    phone:'',
@@ -90,7 +90,7 @@
         },
         validations: {
             user : {
-                name:{
+                lastname:{
                     required,
                     minLength: minLength(2)
                 },

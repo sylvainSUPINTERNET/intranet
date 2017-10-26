@@ -15,7 +15,7 @@
      <ul>
          <!-- user in users -->
 
-         <li v-for="user in filteredItems">
+         <li v-for="user in users">
              <user-card :user="user" @remove="removeUser"></user-card>
          </li>
      </ul>
@@ -38,6 +38,7 @@
         data () {
             return {
                 users: users,
+                usersSelected: [],
                 wordSearch: "",
                 sortBy: "",
             }
@@ -45,26 +46,36 @@
         methods:{
             removeUser(user){
                 console.log(`user to remove ${user}`);
-                this.users.forEach(function(user) {
+                console.log(user);
+                console.log(this.users.length);
+                this.users = this.users.filter(function(el){
+                    console.log(el, user, el === user)
+                    return el !== user;
                 });
-            }
-        },
-        computed: {
+
+                console.log(this.users.length);
+            },
+
+            /*
             filteredItems() {
                 if(this.wordSearch !== "" && this.sortBy === "name"){
-                    return this.users.filter(user => {
+                    return this.usersSelected.filter(user => {
                         return user.lastname.toLowerCase().indexOf(this.wordSearch.toLowerCase()) > -1
                     })
                 }else if(this.wordSearch !== "" && this.sortBy === "localization"){
-                    return this.users.filter(user => {
+                    return this.usersSelected.filter(user => {
                         return user.city.toLowerCase().indexOf(this.wordSearch.toLowerCase()) > -1
                     })
                 }else{
-                    this.users = users;
+                    this.usersSelected = users;
                     return this.users;
                 }
 
-            }
+            },
+            */
+
+        },
+        computed: {
         },
         filters:{
 
