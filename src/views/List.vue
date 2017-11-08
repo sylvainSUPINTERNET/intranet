@@ -29,6 +29,7 @@
     //import users from '../../src/assets/data/_users.json';
     import UserCard from "../components/UserCard.vue";
     import axios from "axios"
+    import UserService from "../services/UserService";
 
     //composant app
     //on peut aussi indiquer ici le template si on le souhiate (pas besoin de passer par <template>
@@ -45,13 +46,20 @@
         },
         methods:{
             removeUser(user){
-                console.log(`user to remove ${user}`);
-                console.log(user);
-                this.filteredUsers = this.filteredUsers.filter(function(el){
-                    console.log(el, user, el === user)
-                    return el !== user;
+                console.log("remove");
+                axios.delete(`http://localhost:1337/collaborateur/${user._id}`, user)
+                    .then(function(response){
+                        console.log(`response : ${response.message}`);
+                        console.log(response);
+
+                        //console google => application => xhr => response / header
+                        if(response.statusText === "OK"){
+                            console.log("user deleted");
+                        }
+                    }).catch(function(err){
+                    console.error(err);
                 });
-                console.log(this.filteredUsers.length);
+                location.reload();
             },
 
 
@@ -86,12 +94,28 @@
         },
         created(){ //initialise le componentf
             //v-if sur user de home (si null affiche rien)
+
             axios.get('http://localhost:1337/collaborateurs')
                 .then(users => {
                     console.log(users);
                     this.users = users.data;
                     this.filteredUsers = users.data;
                 });
+
+
+            /*
+            console.log(UserService.fetchAll().then(function(data){
+                console.log("RECEIVED" + data);
+                this.users = data;
+                console.log("IS SET" + this.users)
+                this.filteredUsers = data;
+            }));
+            */
+            /*
+            this.users = UserService.fetchAll();
+            this.users.filteredUsers = UserService.fetchAll();
+            */
+
 
         }
     }

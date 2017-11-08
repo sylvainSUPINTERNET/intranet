@@ -35,7 +35,21 @@
         },
         methods:{
             removeUser(user){
-                console.log(`user to remove ${user.lastname}`);
+                //console.log(`user to remove ${user.lastname}`);
+                console.log("delete user");
+                axios.delete(`http://localhost:1337/collaborateur/${user._id}`, user)
+                    .then(function(response){
+                        console.log(`response : ${response.message}`);
+                        console.log(response);
+
+                        //console google => application => xhr => response / header
+                        if(response.statusText === "OK"){
+                            console.log("user deleted");
+                        }
+                    }).catch(function(err){
+                    console.error(err);
+                });
+                location.reload();
             },
             getRandomUser: function(){
                 let user = this.users[Math.floor((Math.random() * this.users.length-1) + 1)];

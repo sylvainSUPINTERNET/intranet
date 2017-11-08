@@ -7,12 +7,12 @@
   <form method="POST" @submit.prevent="send">
    <div class="form-check">
     <label class="form-check-label">
-     Femme : <input type="radio" class="form-check-input" name="female" id="girl" value="female">
-     Homme : <input type="radio" class="form-check-input" name="male" id="man" value="male">
+     Femme : <input type="radio" class="form-check-input" v-model="user.gender" id="girl" value="female">
+     Homme : <input type="radio" class="form-check-input" v-model="user.gender" id="man" value="male">
     </label>
     <br>
-    <label for="name">Nom : </label>
-    <input type="text" class="form-check" id="name" placeholder="DOE" v-model="user.name">
+    <label for="lastname">Nom : </label>
+    <input type="text" class="form-check" id="lastname" placeholder="DOE" v-model="user.lastname">
     <small class="form-text text-muted" v-if="!$v.user.lastname.required" > lastname is required</small>
     <small class="form-text text-muted" v-if="!$v.user.lastname.minLength"> your lastname is too short </small>
     <br>
@@ -41,7 +41,7 @@
     <input type="text" class="form-check" id="country" placeholder="France" v-model="user.country">
     <small class="form-text text-muted" v-if="!$v.user.country.required" > country required</small>
     <br>
-    <label for="photo">Pays : </label>
+    <label for="photo">URL : </label>
     <input type="url" class="form-check" id="photo" placeholder="https://" v-model="user.photo">
 
     <br>
@@ -68,7 +68,7 @@
         data () {
             return {
                user : { //inutile en vue.js 2.5 (ajout du deep watcher qui regarde automatiquement de manière dynamique les propriété de 'objet en temps reel)
-                   gender:'',
+                   gender:"",
                    lastname:'',
                    firstname:'',
                    email:'',

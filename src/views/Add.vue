@@ -16,6 +16,7 @@
     import UserCard from '../components/UserCard.vue';
     import users from '../../src/assets/data/_users.json';
     import UserForm from '../components/UserForm.vue';
+    import axios from 'axios';
 
 
 
@@ -33,8 +34,21 @@
         methods:{
             addUser(user){
                     console.log(user);
-                    this.lastname = user.lastname
+                axios.post('http://localhost:1337/collaborateur', user)
+                    .then(function(response){
+                        console.log(`response : ${response.message}`);
+                        console.log(response);
+
+                        //console google => application => xhr => response / header
+                        if(response.statusText === "OK"){
+
+                        }
+                    }).catch(function(err){
+                        console.error(err);
+                });
+                location.reload();
             }
+
         },
         filters:{
 
