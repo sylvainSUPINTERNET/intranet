@@ -7,7 +7,7 @@
      <h1>Bienvenue sur Sup'intranet</h1>
      <hr class="hrWelcom">
      <p class="dit-bonjour">Avez vous dit bonjour à ...</p>
-     <user-card :user="user" @remove="removeUser"></user-card>
+     <user-card :user="user" v-if="user" @remove="removeUser"></user-card>
      <button type="button" class="btn btn-primary" v-on:click="changeUser()">
          <span class="glyphicon glyphicon-refresh " aria-hidden="true"></span>
          Dire bonjour à quelqu'un d'autres</button>
@@ -19,7 +19,8 @@
 <script>
 
     import UserCard from "../components/UserCard.vue"; //import le json
-    import users from '../../src/assets/data/_users.json';
+    //import users from '../../src/assets/data/_users.json';
+    import axios from "axios";
 
     //composant app
     //on peut aussi indiquer ici le template si on le souhiate (pas besoin de passer par <template>
@@ -28,7 +29,8 @@
         name: 'homeView',
         data () {
             return {
-                user: this.getRandomUser(),
+                user: null,
+                users: []
             }
         },
         methods:{
@@ -36,7 +38,7 @@
                 console.log(`user to remove ${user.lastname}`);
             },
             getRandomUser: function(){
-                var user = users[Math.floor((Math.random() * 10-1) + 1)];
+                let user = this.users[Math.floor((Math.random() * this.users.length-1) + 1)];
                 console.log(user);
                 //his.data.user = user;
                 this.user = user;
@@ -48,6 +50,16 @@
             }
         },
         filters:{
+
+        },
+        created(){ //initialise le componentf
+            //v-if sur user de home (si null affiche rien)
+            axios.get('http://localhost:1337/collaborateurs')
+                .then(users => {
+                    console.log(users);
+                    this.users = users.data;
+                    this.getRandomUser();
+                })
 
         }
     }

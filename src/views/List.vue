@@ -16,7 +16,7 @@
          <!-- user in users -->
 
          <li v-for="user in filteredUsers">
-             <user-card :user="user" @remove="removeUser"></user-card>
+             <user-card :user="user" v-if="user" @remove="removeUser"></user-card>
          </li>
      </ul>
  </div>
@@ -26,9 +26,9 @@
 <script>
 
 
-    import users from '../../src/assets/data/_users.json';
+    //import users from '../../src/assets/data/_users.json';
     import UserCard from "../components/UserCard.vue";
-
+    import axios from "axios"
 
     //composant app
     //on peut aussi indiquer ici le template si on le souhiate (pas besoin de passer par <template>
@@ -37,8 +37,8 @@
         name: 'listView',
         data () {
             return {
-                users: users, //init users list
-                filteredUsers : users, //filter list
+                users: null, //init users list
+                filteredUsers : this.users, //filter list
                 wordSearch: "",
                 filterBy : 'name'
             }
@@ -82,6 +82,16 @@
         computed: {
         },
         filters:{
+
+        },
+        created(){ //initialise le componentf
+            //v-if sur user de home (si null affiche rien)
+            axios.get('http://localhost:1337/collaborateurs')
+                .then(users => {
+                    console.log(users);
+                    this.users = users.data;
+                    this.filteredUsers = users.data;
+                });
 
         }
     }

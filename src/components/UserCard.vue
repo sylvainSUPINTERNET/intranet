@@ -10,7 +10,7 @@
    </div>
    <div class="infos-user">
     <div class="card-block">
-     <h3>{{user.firstname}}</h3>
+     <h3>{{user.name}} {{user.firstname}}</h3>
      <p class="card-text" ><span class="             glyphicon glyphicon-envelope
  " aria-hidden="true"></span>{{user.email}}</p>
      <p class="card-text">
